@@ -16,13 +16,22 @@ import javafx.stage.Stage;
 public class Menu extends Application{
 	
 	public static void main(String[] args) {
-		String text = "Hallo das ist ein Geheimnis";
+		String text = "If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.";
 		
 		CipherCaeser caeser = new CipherCaeser();
+		int key = 9;
+		String encryptedText = caeser.encrypt(text,key);
+		System.out.println(encryptedText);
+		System.out.println(caeser.decrypt(encryptedText, key));
+		System.out.println("roqnqjmjwhcqrwplxwormnwcrjucxbjhqnfaxcnrcrwlryqnacqjcrbkhbxlqjwprwpcqnxamnaxocqnunccnabxocqnjuyqjknccqjcwxcjfxamlxdumknvjmnxdc");
 		
-		
-		System.out.println(caeser.encrypt(text,1));
-		System.out.println(caeser.generateKey());
+//		// Generate random number between 5 to 30  
+//        int a = ((int) Math.random() * 30);  
+//        int b = 5 +  ((int) Math.random() * 30);  
+//        // Output is different every time this code is executed    
+//        System.out.println(a);  
+//        System.out.println(b);
+//		
 		
 		Application.launch(args);
 	}
@@ -32,32 +41,16 @@ public class Menu extends Application{
 		
 		Button encryptButton = new Button("Encrypt Data");
 		Button decryptButton = new Button("Decrypt Data");
-		
-	
-		
-		// Create the Text Fields
-        //TextField firstNameFld = new TextField();
- 
-        // Create the Labels
-        //Label firstNameLbl = new Label("_First Name:");
-         
-        // Bind the Label to the according Field
-        //firstNameLbl.setLabelFor(firstNameFld);
-        // Set mnemonic parsing to the Label
-        //firstNameLbl.setMnemonicParsing(true);
-         
 
-         
         // Create the BorderPane (Outside Container)
 		// Add the Labels, Textield and Buttons to the BorderPane
 		BorderPane borderPane = new BorderPane();
-		
-		
+
 		//Label at the top
 		Label title = new Label("Input the text to encrypt/decrypt");
 		title.setFont(new Font(20));
 		borderPane.setTop(title);
-		//
+		
 		//Textarea in the center
 		TextArea textArea = new TextArea();
 		borderPane.setCenter(textArea);
