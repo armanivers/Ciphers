@@ -13,17 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class Menu extends Application{
+public class MenuWindow extends Application{
 	
 	public static void main(String[] args) {
-		String text = "This is a secret";
-		
-		CipherCaeser caeser = new CipherCaeser();
-		int key = 9;
-		String encryptedText = caeser.encrypt(text,key);
-		System.out.println(encryptedText);
-		System.out.println(caeser.decrypt(encryptedText, key));
-		
 		Application.launch(args);
 	}
 	
@@ -32,6 +24,7 @@ public class Menu extends Application{
 		
 		Button encryptButton = new Button("Encrypt Data");
 		Button decryptButton = new Button("Decrypt Data");
+		
 
         // Create the BorderPane (Outside Container)
 		// Add the Labels, Textield and Buttons to the BorderPane
@@ -46,6 +39,27 @@ public class Menu extends Application{
 		TextArea textArea = new TextArea();
 		borderPane.setCenter(textArea);
 		
+		//Button Evenhandling
+		encryptButton.setOnAction(e -> {
+			String rawText = textArea.getText();
+			if(rawText.length()<=0) {
+				PopUpWindow.display("Ooops!", "Please first input a text,which will be encrypted!");
+			}else {
+			String answer = EncryptionWindow.display("Encryption Window", "Select your encryption method",rawText);
+			textArea.setText(answer);
+			}
+		});
+		
+		decryptButton.setOnAction(e -> {
+			String decryptedText = textArea.getText();
+			if(decryptedText.length()<=0) {
+				PopUpWindow.display("Ooops!", "Please first input a text,which will be decrypted!");
+			}else {
+			String answer = EncryptionWindow.display("Encryption Window", "Select your encryption method",decryptedText);
+			textArea.setText(answer);
+			}
+		});
+		
         //Buttons at the bottom
 		//Create HBox to hold all the buttons
 		HBox hbox = new HBox(100,encryptButton,decryptButton);
@@ -59,7 +73,7 @@ public class Menu extends Application{
         // Add the scene to the Stage
         stage.setScene(scene);
         // Set the title of the Stage
-        stage.setTitle("Cyphers by Ari");
+        stage.setTitle("Cyphers by Latenitearii");
         // Display the Stage
         stage.show();       
 	}

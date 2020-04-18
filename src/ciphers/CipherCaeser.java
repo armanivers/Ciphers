@@ -48,15 +48,23 @@ public class CipherCaeser {
 		
 		//go through the whole string
 		for(int i = 0 ; i < rawText.length() ; i++) {
+			
+			char currentChar = rawText.charAt(i);
 			//check for whitespace, maybe use string method .trim (faster?)
-			if(rawText.charAt(i) == ' ') {
+			if(currentChar == ' ') {
 				//if so do nothing and go to the next letter
 				continue;
 			}
-			//otherwise find the key of the letter
-			int keyValue = alphabet.get(rawText.charAt(i));
-			//and shift the current key value by the encryptionKey value with its corresponding letter and save it to the endresult
-			encryptedText += encryptionArr[(keyValue+encryptionKey)%26]; 
+			
+			//check if the current character is a number, if yes simply add it to the endresult
+			if(Character.isDigit(currentChar)) {
+				encryptedText+= currentChar;
+			}else {
+				//otherwise find the key of the letter
+				int keyValue = alphabet.get(currentChar);
+				//and shift the current key value by the encryptionKey value with its corresponding letter and save it to the endresult
+				encryptedText += encryptionArr[(keyValue+encryptionKey)%26]; 
+			}
 		}
 		
 		return encryptedText;
@@ -83,21 +91,28 @@ public class CipherCaeser {
 		String decryptedText = "";
 		
 		for(int i = 0 ; i < encryptedText.length() ; i++) {
+			
+			char currentChar = encryptedText.charAt(i);
 			//check for whitespace, maybe use string method .trim (faster?)
-			if(encryptedText.charAt(i) == ' ') {
+			if(currentChar == ' ') {
 				//if so do nothing and go to the next letter, shouldn't be the case!
 				continue;
 			}
-			//otherwise find the key of the letter
-			int keyValue = alphabet.get(encryptedText.charAt(i));
-			//and shift the current key value by the encryptionKey value with its corresponding letter
-			int shiftedValue= (keyValue-encryptionKey)%26;
-			//returns positive number if shiftedValue is negative
-			if(shiftedValue < 0) {
-				shiftedValue+=26;
-			}
 			
-			decryptedText += encryptionArr[shiftedValue]; 
+			//check if the current character is a number, if yes simply add it to the endresult
+			if(Character.isDigit(currentChar)) {
+				decryptedText+= currentChar;
+			}else {
+				//otherwise find the key of the letter
+				int keyValue = alphabet.get(encryptedText.charAt(i));
+				//and shift the current key value by the encryptionKey value with its corresponding letter
+				int shiftedValue= (keyValue-encryptionKey)%26;
+				//returns positive number if shiftedValue is negative
+				if(shiftedValue < 0) {
+					shiftedValue+=26;
+				}	
+				decryptedText += encryptionArr[shiftedValue]; 
+			}
 		}
 		
 		return decryptedText;

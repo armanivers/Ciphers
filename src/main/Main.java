@@ -1,6 +1,6 @@
 package main;
 
-import gui.Menu;
+import gui.MenuWindow;
 
 public class Main {
 	public static void main(String args[]) {
@@ -8,7 +8,7 @@ public class Main {
 		//Menu menu = new Menu();
 		//menu.main();
 		
-		Menu.main(args);
+		MenuWindow.main(args);
 		
 		//Menu.launch(args);
 	}
