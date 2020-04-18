@@ -16,22 +16,13 @@ import javafx.stage.Stage;
 public class Menu extends Application{
 	
 	public static void main(String[] args) {
-		String text = "If he had anything confidential to say, he wrote it in cipher, that is, by so changing the order of the letters of the alphabet, that not a word could be made out.";
+		String text = "This is a secret";
 		
 		CipherCaeser caeser = new CipherCaeser();
 		int key = 9;
 		String encryptedText = caeser.encrypt(text,key);
 		System.out.println(encryptedText);
 		System.out.println(caeser.decrypt(encryptedText, key));
-		System.out.println("roqnqjmjwhcqrwplxwormnwcrjucxbjhqnfaxcnrcrwlryqnacqjcrbkhbxlqjwprwpcqnxamnaxocqnunccnabxocqnjuyqjknccqjcwxcjfxamlxdumknvjmnxdc");
-		
-//		// Generate random number between 5 to 30  
-//        int a = ((int) Math.random() * 30);  
-//        int b = 5 +  ((int) Math.random() * 30);  
-//        // Output is different every time this code is executed    
-//        System.out.println(a);  
-//        System.out.println(b);
-//		
 		
 		Application.launch(args);
 	}
